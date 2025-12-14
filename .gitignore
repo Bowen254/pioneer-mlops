@@ -11,7 +11,7 @@ model_artifacts/*.pkl
 model_artifacts/*.h5
 
 # Temp
-*.ipynb
+# *.ipynb
 # *.csv
 # reports/
 # *.py
