@@ -1,0 +1,18 @@
+# Remove bentoml Package
+bentoml/
+
+# Environment Files
+.env
+
+# Model Artifacts
+model_artifacts/
+model_artifacts/*.pkl
+
+model_artifacts/*.h5
+
+# Temp
+*.ipynb
+*.csv
+reports/
+*.py
+README.MD
