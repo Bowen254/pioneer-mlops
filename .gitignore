@@ -5,7 +5,6 @@ bentoml/
 .env
 
 # Model Artifacts
-model_artifacts/
 model_artifacts/*.pkl
 
 model_artifacts/*.h5
