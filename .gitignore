@@ -14,5 +14,5 @@ model_artifacts/*.h5
 *.ipynb
 *.csv
 reports/
-*.py
-README.MD
+# *.py
+# README.MD
