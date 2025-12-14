@@ -6,7 +6,6 @@ bentoml/
 
 # Model Artifacts
 model_artifacts/*.pkl
-
 model_artifacts/*.h5
 
 # Temp
