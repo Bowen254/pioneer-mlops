@@ -12,7 +12,7 @@ model_artifacts/*.h5
 
 # Temp
 *.ipynb
-*.csv
-reports/
+# *.csv
+# reports/
 # *.py
 # README.MD
