@@ -7,8 +7,6 @@ The pipeline covers the full machine learning lifecycle—from data ingestion an
 
 ### What’s included?
 
-![MLOps stages](./assets/Mlops-summary.png)
-
 - Data engineering & preprocessing
 
 - Exploratory data analysis (EDA)
@@ -67,8 +65,13 @@ The workflow consists of the following steps:
 
 - Business Problem & Data Loading
 - Load the dataset and define the prediction objective.
+![Data Loading](./assets/stage1)
+
+- Exploring Data
+![Exploring the Data](./assets/stage2.png)
 
 - Data Engineering
+![Data Engineering Pipeline](./assets/stage3)
 
 - Handle missing values
 
@@ -78,11 +81,16 @@ The workflow consists of the following steps:
 
 - Create date-based features
 
-- EDA & Experimentation
+#### Feature Score 
+![Feature score](./assets/stage4.png)
+
+#### EDA & Experimentation
 - Generate dataset summaries and correlation analyses, logged via Metaflow cards.
 
 #### Model Development
-Train a Random Forest Regressor using train, validation, and test splits.
+Training a Random Forest Regressor using train, validation, and test splits.
+![Model Development](./assets/stage5.png)
+
 
 #### Model Validation
 - Evaluate performance using:
@@ -93,17 +101,22 @@ Train a Random Forest Regressor using train, validation, and test splits.
 
 - R² score
 
+![Model Validation](./assets/stage6.png)
+
 #### Monitoring & Drift Detection
 Detect feature drift using Evidently and generate HTML reports.
+![Drift Report](./assets/stage7.png)
 
 #### Model Packaging
 Package the trained model and preprocessing artifacts using BentoML.
+![Package Deployment](./assets/stage8.png)
 
 #### Continuous Retraining Trigger
 Placeholder for future retraining automation.
 
 #### Flow Completion
 Confirms successful execution of the entire pipeline.
+![Prediction](./assets/stage9.png)
 
 ### Running the Workflow
 
