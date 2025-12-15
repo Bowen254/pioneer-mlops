@@ -65,7 +65,8 @@ The workflow consists of the following steps:
 
 - Business Problem & Data Loading
 - Load the dataset and define the prediction objective.
-![Data Loading](./assets/stage1)
+
+![Data Loading](./assets/stage1.png)
 
 - Exploring Data
 ![Exploring the Data](./assets/stage2.png)
