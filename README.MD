@@ -1,99 +1,151 @@
-NYC Airbnb Price Prediction
-Overview
+# NYC Airbnb Price Prediction
+## Overview
 
-This project implements an end-to-end ML workflow to predict Airbnb nightly prices in New York City using Metaflow. The workflow includes:
+This project demonstrates an end-to-end MLOps workflow for predicting Airbnb nightly prices in New York City using Metaflow.
 
-Data engineering and preprocessing
+The pipeline covers the full machine learning lifecycleâ€”from data ingestion and exploration to model deployment and monitoringâ€”while emphasizing reproducibility, transparency, and best practices.
 
-Exploratory data analysis (EDA)
+### Whatâ€™s included?
 
-Model training, validation, and drift monitoring
+- Data engineering & preprocessing
 
-Model packaging and serving via BentoML + FastAPI
+- Exploratory data analysis (EDA)
 
-Simulation testing using a validation set
+- Model training, validation & evaluation
 
-All workflow steps include Metaflow inspections and cards for transparency.
+- Drift detection & monitoring
 
-Dataset
+- Model packaging & API serving with BentoML + FastAPI
+
+- Validation simulation using a held-out dataset
+
+Each step of the workflow is fully traceable using Metaflow inspections and cards.
+
+### Dataset
 
 Source: NYC Airbnb Open Data
 
 Year: 2019
 
-Features include:
+### Key Features
 
-neighbourhood_group, neighbourhood, room_type
+Location: `neighbourhood_group, neighbourhood, latitude, longitude `
 
-latitude, longitude
+Listing details: ` room_type, minimum_nights, availability_365 `
 
-minimum_nights, number_of_reviews, reviews_per_month
+Reviews: `number_of_reviews, reviews_per_month, last_review `
 
-calculated_host_listings_count, availability_365
+Host info: `calculated_host_listings_count`
 
-last_review, price
+Target variable: `price`
 
-Requirements
-pip install -r requirements.txt
+### Requirements
+
+Install all dependencies using:
+
+```pip install -r requirements.txt```
+
+### Key Libraries
+
+- metaflow
+
+- scikit-learn
+
+- pandas, numpy
+
+- bentoml
+
+- fastapi, uvicorn
+
+- evidently
+
+## ML Workflow
+
+The workflow consists of the following steps:
+
+- Business Problem & Data Loading
+- Load the dataset and define the prediction objective.
+![Data Loading](./assets/stage1)
+
+- Exploring Data
+![Exploring the Data](./assets/stage2.png)
+
+- Data Engineering
+![Data Engineering Pipeline](./assets/stage3)
+
+- Handle missing values
+
+- Encode categorical features
+
+- Scale numerical variables
+
+- Create date-based features
+
+#### Feature Score 
+![Feature score](./assets/stage4.png)
+
+#### EDA & Experimentation
+- Generate dataset summaries and correlation analyses, logged via Metaflow cards.
+
+#### Model Development
+Training a Random Forest Regressor using train, validation, and test splits.
+![Model Development](./assets/stage5.png)
 
 
-Key packages:
+#### Model Validation
+- Evaluate performance using:
 
-metaflow
+- MAE
 
-scikit-learn
+- RMSE
 
-pandas, numpy
+- RÂ² score
 
-bentoml
+![Model Validation](./assets/stage6.png)
 
-fastapi, uvicorn
+#### Monitoring & Drift Detection
+Detect feature drift using Evidently and generate HTML reports.
+![Drift Report](./assets/stage7.png)
 
-evidently
+#### Model Packaging
+Package the trained model and preprocessing artifacts using BentoML.
+![Package Deployment](./assets/stage8.png)
 
-Workflow
+#### Continuous Retraining Trigger
+Placeholder for future retraining automation.
 
-The ML workflow consists of the following steps:
+#### Flow Completion
+Confirms successful execution of the entire pipeline.
 
-Business Problem & Data Loading – Load dataset and define prediction goal
+![Prediction](./assets/stage9.png)
 
-Data Engineering – Clean missing values, encode categorical variables, scale numeric features, create date-based features
+### Running the Workflow
 
-EDA & Experimentation – Generate dataset summaries and correlation analyses, logged to cards
+Run the Metaflow pipeline:
 
-Model Development – Train Random Forest Regressor with train-test-validation split
-
-Model Validation – Evaluate using MAE, RMSE, and R2 score
-
-Monitoring & Drift Detection – Detect feature drift with Evidently and generate HTML reports
-
-Model Packaging – Save model with BentoML including preprocessing artifacts
-
-Continuous Retraining Trigger – Placeholder for future retraining logic
-
-Flow Completion – Confirms successful workflow execution
-
-Running the Workflow
+``` python
 python nyc_airbnb_flow.py run
 
-
-Inspect workflow and cards:
-
+# Inspect Runs & Cards
 python nyc_airbnb_flow.py inspect
 python nyc_airbnb_flow.py card <run-id>
 
-Serving the Model
+```
 
-Start FastAPI service:
+### Serving the Model
 
+- Start the FastAPI service:
+
+``` python
 uvicorn serve_airbnb_model:app --reload
 
+```
+
 Prediction Endpoint
-POST http://127.0.0.1:8000/predict
+POST `http://127.0.0.1:8000/predict`
 
-
-Payload Example:
-
+Example Request Payload
+``` json
 {
   "neighbourhood_group": "Brooklyn",
   "neighbourhood": "Williamsburg",
@@ -107,46 +159,68 @@ Payload Example:
   "availability_365": 180,
   "last_review": "2019-06-15"
 }
+```
 
-
-Response Example:
-
+Example Response
+``` json
 {
   "predicted_price": 250.75
 }
+```
 
-Validation Simulation
+### Validation Simulation
 
-Uses model_artifacts/validation_set.csv
+The validation simulation:
 
-Calls FastAPI endpoint for each validation sample
+- Uses model_artifacts/validation_set.csv
 
-Computes deviations: mean, max, min, median (absolute and percentage)
+- Sends each sample to the FastAPI endpoint
+
+- Computes deviation metrics:
+
+  - Mean
+
+  - Max / Min
+
+  - Median
+
+  - Absolute and percentage differences
 
 Run the simulation:
 
+``` python
 python simulate_validation.py
 
-Drift Monitoring
+```
 
-Generated HTML drift report is saved in:
+### Drift Monitoring
 
-reports/drift_report.html
+Feature drift reports are automatically generated and saved to:
 
-Deliverables
+`reports/drift_report.html`
 
-nyc_airbnb_flow.py – Metaflow workflow
+## Deliverables
 
-serve_airbnb_model.py – FastAPI inference endpoint
+- nyc_airbnb_flow.py â€“ Metaflow workflow definition
 
-simulate_validation.py – Validation simulation script
+- serve_airbnb_model.py â€“ FastAPI inference service
 
-model_artifacts/validation_set.csv – Saved validation data
+- simulate_validation.py â€“ Validation simulation script
 
-reports/drift_report.html – Drift monitoring report
+- model_artifacts/validation_set.csv â€“ Validation dataset
 
-notebooks/ – Jupyter notebooks with workflow inspections and cards
+- reports/drift_report.html â€“ Drift monitoring report
 
-Business Objective
+- notebooks/ â€“ Jupyter notebooks with workflow inspections and cards
 
-Predict Airbnb nightly prices within 20% deviation from actual prices while ensuring reproducibility, monitoring, and MLOps best practices.
+## Business Objective
+
+Predict Airbnb nightly prices within a 20% deviation from actual values while ensuring:
+
+- Reproducibility
+
+- Observability
+
+- Robust monitoring
+
+- Production-ready MLOps practices
