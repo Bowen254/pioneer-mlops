@@ -7,6 +7,8 @@ The pipeline covers the full machine learning lifecycle—from data ingestion an
 
 ### What’s included?
 
+![MLOps stages](./assets/Mlops-summary.png)
+
 - Data engineering & preprocessing
 
 - Exploratory data analysis (EDA)
