@@ -202,17 +202,17 @@ Feature drift reports are automatically generated and saved to:
 
 ## Deliverables
 
-- nyc_airbnb_flow.py – Metaflow workflow definition
+- `nyc_airbnb_flow.py` – Metaflow workflow definition
 
-- serve_airbnb_model.py – FastAPI inference service
+- `serve_airbnb_model.py` – FastAPI inference service
 
-- simulate_validation.py – Validation simulation script
+- `simulate_validation`.py – Validation simulation script
 
-- model_artifacts/validation_set.csv – Validation dataset
+- `model_artifacts/validation_set.csv` – Validation dataset
 
-- reports/drift_report.html – Drift monitoring report
+- `reports/drift_report.html` – Drift monitoring report
 
-- notebooks/ – Jupyter notebooks with workflow inspections and cards
+- `notebooks/` – Jupyter notebooks with workflow inspections and cards
 
 ## Business Objective
 
